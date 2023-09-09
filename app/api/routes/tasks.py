@@ -33,7 +33,7 @@ async def create_task(task: TaskCreate, username: str = Depends(get_user_by_toke
                                     completed=task.completed, owner_id=user.id)
 
     for connection in active_connections:
-        connection.send_text(f"New task created: {task_db.title}")
+        await connection.send_text(f"New task created: {task_db.title}")
 
     return task_db 
 
@@ -65,7 +65,7 @@ async def update_task(task_id: int, task_update: TaskUpdate):
     
 
     for connection in active_connections:
-        connection.send_text(f"Task {db_task.id} updated")
+        await connection.send_text(f"Task {db_task.id} updated")
 
     return db_task
 
@@ -78,6 +78,6 @@ async def delete_task(task_id: int):
         raise HTTPException(status_code=404, detail="Task not found")
 
     for connection in active_connections:
-        connection.send_text(f"Task {task.id} deleted")
+        await connection.send_text(f"Task {task.id} deleted")
 
     return task

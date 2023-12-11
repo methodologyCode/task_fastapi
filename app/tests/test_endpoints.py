@@ -12,9 +12,9 @@ def auth_header():
 
 @pytest.mark.anyio
 async def test_async_create_user(async_client: AsyncClient):
-    response = await async_client.post("/api/v1/register/", json={"username": "viz14",
-                                                          "password": "viz14",
-                                                          "email": "viz14@test.com"})
+    response = await async_client.post("/api/v1/register/", json={"username": "viz1",
+                                                          "password": "viz1",
+                                                          "email": "viz1@test.com"})
     assert response.status_code == 200
     assert "username" in response.json()
     assert "email" in response.json()
